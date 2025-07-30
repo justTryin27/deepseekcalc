@@ -6,9 +6,6 @@
     <title>NeoCalc | Stunning Calculator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
 </head>
 <body>
     <div class="auth-container">
@@ -64,7 +61,7 @@
         </div>
     </div>
 
-    <!-- Auth Modals -->
+    <!-- Auth Modal -->
     <div id="auth-modal" class="modal hidden">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -76,6 +73,44 @@
         </div>
     </div>
 
+    <!-- Firebase and App Scripts -->
+    <script type="module">
+        // Firebase imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            signOut,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        // Your Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxIfuq06-Q3mAo1LieVYQcKfwrUmIGmko",
+            authDomain: "neocalc-55b1d.firebaseapp.com",
+            projectId: "neocalc-55b1d",
+            storageBucket: "neocalc-55b1d.firebasestorage.app",
+            messagingSenderId: "1017622178453",
+            appId: "1:1017622178453:web:a84e6b661f3b63c031099c",
+            measurementId: "G-EW0MBK6N6B"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Make auth available globally
+        window.firebaseAuth = {
+            auth,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged
+        };
+    </script>
+
+    <!-- Your regular JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>

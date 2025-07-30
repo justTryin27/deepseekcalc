@@ -3,74 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeoCalc | Stunning Calculator</title>
+    <title>NeoCalc | Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="auth-body">
     <div class="auth-container">
-        <div id="auth-buttons" class="hidden">
-            <button id="login-btn">Login</button>
+        <div class="auth-header">
+            <h1>NEO<span>CALC</span></h1>
+            <p>Stunning Calculator with Dark Mode</p>
+        </div>
+        
+        <div class="auth-tabs">
+            <button id="signup-tab" class="active">Sign Up</button>
+            <button id="login-tab">Login</button>
+        </div>
+        
+        <div id="signup-form" class="auth-form">
+            <h2>Create Account</h2>
+            <div id="signup-error" class="error"></div>
+            <input type="email" id="signup-email" placeholder="Email">
+            <input type="password" id="signup-password" placeholder="Password">
+            <input type="password" id="signup-confirm" placeholder="Confirm Password">
             <button id="signup-btn">Sign Up</button>
         </div>
-        <div id="user-info" class="hidden">
-            <span id="user-email"></span>
-            <button id="logout-btn">Logout</button>
-        </div>
-        <div id="auth-message"></div>
-    </div>
-
-    <div class="calculator">
-        <div class="header">
-            <h1>NEO<span>CALC</span></h1>
-            <button id="theme-toggle" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
+        
+        <div id="login-form" class="auth-form hidden">
+            <h2>Welcome Back</h2>
+            <div id="login-error" class="error"></div>
+            <input type="email" id="login-email" placeholder="Email">
+            <input type="password" id="login-password" placeholder="Password">
+            <button id="login-btn">Login</button>
         </div>
         
-        <div class="display">
-            <div id="previous-operand"></div>
-            <div id="current-operand">0</div>
-        </div>
-        
-        <div class="buttons">
-            <button data-action="clear" class="operator">C</button>
-            <button data-action="delete">⌫</button>
-            <button data-action="percentage" class="operator">%</button>
-            <button data-action="divide" class="operator">÷</button>
-            
-            <button data-action="number">7</button>
-            <button data-action="number">8</button>
-            <button data-action="number">9</button>
-            <button data-action="multiply" class="operator">×</button>
-            
-            <button data-action="number">4</button>
-            <button data-action="number">5</button>
-            <button data-action="number">6</button>
-            <button data-action="subtract" class="operator">−</button>
-            
-            <button data-action="number">1</button>
-            <button data-action="number">2</button>
-            <button data-action="number">3</button>
-            <button data-action="add" class="operator">+</button>
-            
-            <button data-action="negate" class="operator">±</button>
-            <button data-action="number">0</button>
-            <button data-action="decimal">.</button>
-            <button data-action="equals" class="equals">=</button>
+        <div class="guest-option">
+            <p>or</p>
+            <button id="guest-btn">Continue as Guest</button>
         </div>
     </div>
 
-    <!-- Auth Modal -->
-    <div id="auth-modal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modal-title">Login</h2>
-            <div id="auth-error" class="error"></div>
-            <input type="email" id="auth-email" placeholder="Email">
-            <input type="password" id="auth-password" placeholder="Password">
-            <button id="auth-action-btn">Login</button>
-        </div>
+    <div id="calculator-page" class="hidden">
+        <!-- Calculator content will be loaded here dynamically -->
     </div>
 
     <!-- Firebase and App Scripts -->

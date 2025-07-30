@@ -1,202 +1,144 @@
+/* Add this to your existing CSS */
 :root {
-    --bg-primary: #f0f2f5;
-    --bg-secondary: #ffffff;
-    --text-primary: #333;
-    --text-secondary: #666;
-    --accent: #4a6cf7;
-    --accent-hover: #3a5af5;
-    --shadow: rgba(0, 0, 0, 0.1);
-    --button-bg: #f9f9f9;
-    --button-hover: #e9ecef;
-    --operator-bg: #e3e7ff;
-    --equals-bg: #4a6cf7;
-    --equals-hover: #3a5af5;
+    /* ... existing variables ... */
+    --modal-bg: rgba(0, 0, 0, 0.7);
+    --modal-content-bg: #ffffff;
 }
 
 .dark-mode {
-    --bg-primary: #121826;
-    --bg-secondary: #1f2937;
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --accent: #6366f1;
-    --accent-hover: #4f46e5;
-    --shadow: rgba(0, 0, 0, 0.3);
-    --button-bg: #1a2439;
-    --button-hover: #2d3748;
-    --operator-bg: #2d3a5c;
+    /* ... existing dark mode variables ... */
+    --modal-content-bg: #1f2937;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-body {
-    background-color: var(--bg-primary);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.calculator {
-    width: 100%;
-    max-width: 400px;
-    background-color: var(--bg-secondary);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 30px var(--shadow);
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: linear-gradient(135deg, var(--accent), #6c5ce7);
-    color: white;
-}
-
-.header h1 {
-    font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-}
-
-.header h1 span {
-    font-weight: 300;
-}
-
-#theme-toggle {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s, background 0.3s;
-}
-
-#theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-
-.display {
-    padding: 25px 20px;
-    text-align: right;
-    min-height: 120px;
+.auth-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 1000;
 }
 
-#previous-operand {
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-    min-height: 28px;
-    overflow-wrap: break-word;
+#auth-buttons, #user-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-#current-operand {
-    color: var(--text-primary);
-    font-size: 3rem;
-    font-weight: 700;
-    margin-top: 10px;
-    overflow-wrap: break-word;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background-color: var(--text-secondary);
-    padding: 1px;
-}
-
-button {
+.auth-container button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: var(--accent);
+    color: white;
     border: none;
-    padding: 20px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.auth-container button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+#user-email {
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-right: 10px;
+}
+
+#auth-message {
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    max-width: 250px;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: var(--modal-content-bg);
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
     font-size: 1.5rem;
     cursor: pointer;
+    color: var(--text-primary);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
     background-color: var(--button-bg);
     color: var(--text-primary);
-    outline: none;
-    position: relative;
-    overflow: hidden;
 }
 
-button:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
+.modal-content button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-button:focus:not(:active)::after {
-    animation: ripple 0.6s ease-out;
+.modal-content button:hover {
+    background-color: var(--accent-hover);
 }
 
+.error {
+    color: #ff6b6b;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Add to existing button styles */
 button.active {
     transform: scale(0.95);
     opacity: 0.8;
     background-color: var(--accent) !important;
     color: white !important;
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(0, 0);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(20, 20);
-        opacity: 0;
-    }
-}
-
-button:hover {
-    background-color: var(--button-hover);
-}
-
-.operator {
-    background-color: var(--operator-bg);
-    font-weight: 600;
-}
-
-.equals {
-    background-color: var(--equals-bg);
-    color: white;
-    font-weight: 600;
-}
-
-.equals:hover {
-    background-color: var(--equals-hover);
-}
-
-@media (max-width: 480px) {
-    button {
-        padding: 18px 5px;
-        font-size: 1.3rem;
-    }
-    
-    #current-operand {
-        font-size: 2.5rem;
-    }
 }

@@ -109,10 +109,121 @@ const previousOperandElement = document.getElementById('previous-operand');
 const currentOperandElement = document.getElementById('current-operand');
 const buttons = document.querySelector('.buttons');
 const themeToggle = document.getElementById('theme-toggle');
+const loginBtn = document.getElementById('login-btn');
+const signupBtn = document.getElementById('signup-btn');
+const logoutBtn = document.getElementById('logout-btn');
+const authButtons = document.getElementById('auth-buttons');
+const userInfo = document.getElementById('user-info');
+const userEmail = document.getElementById('user-email');
+const authMessage = document.getElementById('auth-message');
+const authModal = document.getElementById('auth-modal');
+const modalTitle = document.getElementById('modal-title');
+const authError = document.getElementById('auth-error');
+const authEmail = document.getElementById('auth-email');
+const authPassword = document.getElementById('auth-password');
+const authActionBtn = document.getElementById('auth-action-btn');
+const closeModal = document.querySelector('.close');
 
 const calculator = new Calculator(previousOperandElement, currentOperandElement);
 
-// Event Listeners
+// Auth state management
+let authMode = 'login'; // 'login' or 'signup'
+
+// Check auth state
+firebaseAuth.onAuthStateChanged(firebaseAuth.auth, (user) => {
+    if (user) {
+        // User is signed in
+        userEmail.textContent = user.email;
+        authButtons.classList.add('hidden');
+        userInfo.classList.remove('hidden');
+        authMessage.textContent = `Welcome back, ${user.email.split('@')[0]}!`;
+        setTimeout(() => {
+            authMessage.textContent = '';
+        }, 3000);
+    } else {
+        // User is signed out
+        authButtons.classList.remove('hidden');
+        userInfo.classList.add('hidden');
+        authMessage.textContent = 'Please sign in to save calculations';
+    }
+});
+
+// Auth button handlers
+loginBtn.addEventListener('click', () => {
+    authMode = 'login';
+    modalTitle.textContent = 'Login to Your Account';
+    authActionBtn.textContent = 'Login';
+    authError.textContent = '';
+    authEmail.value = '';
+    authPassword.value = '';
+    authModal.classList.remove('hidden');
+});
+
+signupBtn.addEventListener('click', () => {
+    authMode = 'signup';
+    modalTitle.textContent = 'Create New Account';
+    authActionBtn.textContent = 'Sign Up';
+    authError.textContent = '';
+    authEmail.value = '';
+    authPassword.value = '';
+    authModal.classList.remove('hidden');
+});
+
+logoutBtn.addEventListener('click', () => {
+    firebaseAuth.signOut(firebaseAuth.auth);
+    authMessage.textContent = 'You have been logged out';
+    setTimeout(() => {
+        authMessage.textContent = '';
+    }, 3000);
+});
+
+// Auth form submission
+authActionBtn.addEventListener('click', async () => {
+    const email = authEmail.value;
+    const password = authPassword.value;
+    
+    if (!email || !password) {
+        authError.textContent = 'Please fill in all fields';
+        return;
+    }
+    
+    try {
+        if (authMode === 'login') {
+            await firebaseAuth.signInWithEmailAndPassword(
+                firebaseAuth.auth, 
+                email, 
+                password
+            );
+            authModal.classList.add('hidden');
+        } else {
+            await firebaseAuth.createUserWithEmailAndPassword(
+                firebaseAuth.auth, 
+                email, 
+                password
+            );
+            authModal.classList.add('hidden');
+            authMessage.textContent = 'Account created successfully!';
+            setTimeout(() => {
+                authMessage.textContent = '';
+            }, 3000);
+        }
+    } catch (error) {
+        authError.textContent = error.message;
+    }
+});
+
+// Close modal
+closeModal.addEventListener('click', () => {
+    authModal.classList.add('hidden');
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === authModal) {
+        authModal.classList.add('hidden');
+    }
+});
+
+// Calculator button clicks
 buttons.addEventListener('click', (e) => {
     if (!e.target.matches('button')) return;
 

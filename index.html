@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoCalc | Stunning Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="header">
+            <h1>NEO<span>CALC</span></h1>
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        
+        <div class="display">
+            <div id="previous-operand"></div>
+            <div id="current-operand">0</div>
+        </div>
+        
+        <div class="buttons">
+            <button data-action="clear" class="operator">C</button>
+            <button data-action="delete">⌫</button>
+            <button data-action="percentage" class="operator">%</button>
+            <button data-action="divide" class="operator">÷</button>
+            
+            <button data-action="number">7</button>
+            <button data-action="number">8</button>
+            <button data-action="number">9</button>
+            <button data-action="multiply" class="operator">×</button>
+            
+            <button data-action="number">4</button>
+            <button data-action="number">5</button>
+            <button data-action="number">6</button>
+            <button data-action="subtract" class="operator">−</button>
+            
+            <button data-action="number">1</button>
+            <button data-action="number">2</button>
+            <button data-action="number">3</button>
+            <button data-action="add" class="operator">+</button>
+            
+            <button data-action="negate" class="operator">±</button>
+            <button data-action="number">0</button>
+            <button data-action="decimal">.</button>
+            <button data-action="equals" class="equals">=</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

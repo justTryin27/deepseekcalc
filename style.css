@@ -14,6 +14,7 @@
     --modal-bg: rgba(0, 0, 0, 0.7);
     --modal-content-bg: #ffffff;
     --error-color: #ff6b6b;
+    --success-color: #4caf50;
 }
 
 .dark-mode {
@@ -47,52 +48,159 @@ body {
     padding: 20px;
 }
 
-.auth-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 1000;
+/* Auth Page Styles */
+.auth-body {
+    background: linear-gradient(135deg, #4a6cf7, #6c5ce7);
+    color: white;
 }
 
-#auth-buttons, #user-info {
-    display: flex;
-    gap: 10px;
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.auth-header {
+    margin-bottom: 30px;
+}
+
+.auth-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
-.auth-container button {
-    padding: 8px 16px;
-    border-radius: 20px;
-    background: var(--accent);
-    color: white;
+.auth-header h1 span {
+    font-weight: 300;
+}
+
+.auth-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 5px;
+}
+
+.auth-tabs button {
+    flex: 1;
+    padding: 12px;
+    background: none;
     border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 0.9rem;
+    border-radius: 50px;
     transition: all 0.3s;
 }
 
-.auth-container button:hover {
-    background: var(--accent-hover);
+.auth-tabs button.active {
+    background: white;
+    color: #4a6cf7;
+}
+
+.auth-form {
+    margin-bottom: 20px;
+}
+
+.auth-form h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 14px 20px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    color: #333;
+}
+
+.auth-form input:focus {
+    outline: 2px solid var(--accent);
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: #4a6cf7;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.auth-form button:hover {
+    background: #f0f2f5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.guest-option p {
+    margin: 20px 0;
+    position: relative;
+}
+
+.guest-option p:before, 
+.guest-option p:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.guest-option p:before {
+    left: 0;
+}
+
+.guest-option p:after {
+    right: 0;
+}
+
+#guest-btn {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#guest-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
     transform: translateY(-2px);
 }
 
-#user-email {
-    color: var(--text-primary);
-    padding: 8px 12px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    margin-right: 10px;
-}
-
-#auth-message {
-    color: var(--text-primary);
-    padding: 8px 12px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    max-width: 250px;
+.error {
+    color: #ffdddd;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 0, 0, 0.2);
+    border-radius: 8px;
     text-align: center;
 }
 
@@ -100,77 +208,44 @@ body {
     display: none !important;
 }
 
-/* Modal Styles */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Calculator Page Styles */
+#calculator-page {
     width: 100%;
-    height: 100%;
-    background-color: var(--modal-bg);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    z-index: 2000;
 }
 
-.modal-content {
-    background-color: var(--modal-content-bg);
-    padding: 30px;
-    border-radius: 15px;
+.auth-container-calc {
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-primary);
-}
-
-.modal-content h2 {
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 20px;
-    color: var(--text-primary);
-    text-align: center;
 }
 
-.modal-content input {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: var(--button-bg);
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.modal-content button {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--accent);
-    color: white;
+.user-info button {
+    background: rgba(255, 255, 255, 0.2);
     border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
 }
 
-.modal-content button:hover {
-    background-color: var(--accent-hover);
-}
-
-.error {
-    color: var(--error-color);
-    margin-bottom: 15px;
-    text-align: center;
-    min-height: 20px;
+.user-info button:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .calculator {
@@ -321,6 +396,10 @@ button.active {
 }
 
 @media (max-width: 480px) {
+    .auth-container {
+        padding: 30px 20px;
+    }
+    
     button {
         padding: 18px 5px;
         font-size: 1.3rem;
@@ -330,8 +409,7 @@ button.active {
         font-size: 2.5rem;
     }
     
-    .auth-container {
-        top: 10px;
-        right: 10px;
+    .auth-header h1 {
+        font-size: 2rem;
     }
 }

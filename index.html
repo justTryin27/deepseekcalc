@@ -6,8 +6,23 @@
     <title>NeoCalc | Stunning Calculator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
 </head>
 <body>
+    <div class="auth-container">
+        <div id="auth-buttons" class="hidden">
+            <button id="login-btn">Login</button>
+            <button id="signup-btn">Sign Up</button>
+        </div>
+        <div id="user-info" class="hidden">
+            <span id="user-email"></span>
+            <button id="logout-btn">Logout</button>
+        </div>
+        <div id="auth-message"></div>
+    </div>
+
     <div class="calculator">
         <div class="header">
             <h1>NEO<span>CALC</span></h1>
@@ -46,6 +61,18 @@
             <button data-action="number">0</button>
             <button data-action="decimal">.</button>
             <button data-action="equals" class="equals">=</button>
+        </div>
+    </div>
+
+    <!-- Auth Modals -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Login</h2>
+            <div id="auth-error" class="error"></div>
+            <input type="email" id="auth-email" placeholder="Email">
+            <input type="password" id="auth-password" placeholder="Password">
+            <button id="auth-action-btn">Login</button>
         </div>
     </div>
 
